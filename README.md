@@ -45,10 +45,6 @@ wget https://raw.githubusercontent.com/kramerc/envman/master/bin/envman_install 
 
 envman can be configured in the `.envmanrc` file. Boolean options should be set to `1` for true and `0` for false.
 
-### envman
-* `ENVMAN_DIR` - Path to where envman is installed  
-  **Default:** `~/.envman`
-
 ### dotfiles
 * `DOTFILES_DIR` - Where to store managed dotfiles  
   **Default:** `~/.dotfiles`

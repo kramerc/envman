@@ -1,13 +1,6 @@
 #!/bin/bash
 
 #
-# envman
-#
-
-# Where envman will be located
-export ENVMAN_DIR=~/.envman
-
-#
 # dotfiles
 #
 
