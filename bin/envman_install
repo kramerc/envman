@@ -6,5 +6,8 @@ git clone git://github.com/kramerc/envman.git ~/.envman
 mkdir -p ~/bin
 ln -s ~/.envman/bin/envman ~/bin
 
-echo "Running envman..."
-~/bin/envman
+echo "Configuring envman..."
+cp ~/.envman/templates/.envmanrc ~/.envmanrc
+$EDITOR ~/.envmanrc
+
+echo "envman is installed. Type 'envman' to run it."

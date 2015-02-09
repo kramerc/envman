@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ENVMAN_DIR=~/.envman
-
 #
 # Dependency checks
 #
@@ -33,8 +31,14 @@ fi
 # Begin
 #
 
+if [ ! -f ~/.envmanrc ]; then
+  echo "~/.envmanrc is missing."
+  echo "You need to configure envman first."
+  exit 1
+fi
+
 # Load the config
-source $ENVMAN_DIR/.envmanrc
+source ~/.envmanrc
 
 #
 # dotfiles

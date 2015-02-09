@@ -18,6 +18,8 @@ If you don't have curl installed, you can use the wget variant of this command:
 wget https://raw.githubusercontent.com/kramerc/envman/master/bin/envman_install -O - | bash
 ```
 
+Your editor will open during the process so that you can configure envman.
+
 ### Manual
 
 1. Clone envman to your home directory
@@ -26,14 +28,18 @@ wget https://raw.githubusercontent.com/kramerc/envman/master/bin/envman_install 
    git clone git://github.com/kramerc/envman.git ~/.envman
    ```
 
-2. Optional: Symlink envman to `~/bin`
+2. Symlink envman to `~/bin`
 
    ```
    mkdir -p ~/bin
    ln -s ~/.envman/bin/envman ~/bin
    ```
 
-3. Configure envman (see the [Configuration](#configuration) section below)
+3. Configure envman (see the [Configuration](#configuration) section below for options)
+   ```
+   cp ~/.envman/templates/.envmanrc ~/.envmanrc
+   vim ~/.envmanrc
+   ```
 
 4. Run envman for the first time
 
@@ -43,7 +49,7 @@ wget https://raw.githubusercontent.com/kramerc/envman/master/bin/envman_install 
 
 ## Configuration
 
-envman can be configured in the `.envmanrc` file. Boolean options should be set to `1` for true and `0` for false.
+envman can be configured in the `.envmanrc` file in your home directory. Boolean options should be set to `1` for true and `0` for false.
 
 ### dotfiles
 * `DOTFILES_DIR` - Where to store managed dotfiles  
