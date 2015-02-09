@@ -8,16 +8,6 @@
 export ENVMAN_DIR=~/.envman
 
 #
-# Dependencies
-#
-
-# What your environment must have
-# Git is already to requirement
-export REQUIRED_DEPS=(
-  vim
-)
-
-#
 # dotfiles
 #
 
