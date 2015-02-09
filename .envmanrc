@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#
+# envman
+#
+
+# Where envman will be located
+export ENVMAN_DIR=~/.envman
+
+#
+# Dependencies
+#
+
+# What your environment must have
+# Git is already to requirement
+export REQUIRED_DEPS=(
+  vim
+)
+
+#
+# dotfiles
+#
+
+# Where to store managed dotfiles
+export DOTFILES_DIR=~/.dotfiles
+
+# Remote repository URL for dotfiles
+export DOTFILES_REPO=git@github.com:kramerc/dotfiles.git
+
+# Define dotfiles to manage
+export DOTFILES=(
+  zshrc
+  vimrc
+)
+
+#
+# vim
+#
+
+export VIM_DIR=~/.vim
+export VIM_BUNDLE_DIR=$VIM_DIR/bundle
+export VUNDLE_DIR=$VIM_BUNDLE_DIR/vundle
+
+# Install Vundle if not present?
+export VUNDLE=1
+
+# Install Vundle plugins on first install?
+export VUNDLE_INSTALL_PLUGINS=1
+
+#
+# zsh
+#
+
+# Install oh-my-zsh if not present?
+export OH_MY_ZSH=1
+
+export OH_MY_ZSH_DIR=~/.oh-my-zsh
+
+# oh-my-zsh custom plugins, should be Git repos
+export OH_MY_ZSH_CUSTOM_PLUGINS=(
+  "zsh-syntax-highlighting|git://github.com/zsh-users/zsh-syntax-highlighting.git"
+)
+
+# oh-my-zsh custom themes, should be direct raw links
+export OH_MY_ZSH_CUSTOM_THEMES=(
+  "kramerc.zsh-theme|https://gist.githubusercontent.com/kramerc/a3cf3d0adfbbb30e3d26/raw/kramerc.zsh-theme"
+)

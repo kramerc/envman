@@ -1,0 +1,149 @@
+#!/bin/bash
+
+#
+# Dependency checks
+#
+
+# Check if Git is installed
+if ! which git > /dev/null; then
+  echo "Install Git first!"
+  exit 1
+fi
+
+# Check if curl is installed
+CURL_INSTALLED=0
+if which curl > /dev/null; then
+  CURL_INSTALLED=1
+fi
+
+# Check if wget is installed
+WGET_INSTALLED=0
+if which wget > /dev/null; then
+  WGET_INSTALLED=1
+fi
+
+if [ $CURL_INSTALLED -eq 0 ] && [ $WGET_INSTALLED -eq 0 ]; then
+  echo "Need either curl or wget, exiting."
+  exit 1
+fi
+
+#
+# Begin
+#
+
+# Load the config
+source .envmanrc
+
+#
+# dotfiles
+#
+
+if [ ! -d $DOTFILES_DIR ]; then
+  echo "Setting up dotfiles..."
+
+  # Clone dotfiles repo
+  git clone $DOTFILES_REPO $DOTFILES_DIR
+
+  if [ $? -gt 0 ]; then
+    echo "WARNING: Failed to clone dotfiles repo"
+  fi
+
+
+else
+  echo "Updating dotfiles..."
+
+  pushd $DOTFILES_DIR > /dev/null
+  git pull
+  popd > /dev/null
+fi
+
+# Ensure links are set up
+for file in ${DOTFILES[@]}; do
+  if [ -e $file ]; then
+    mv ~/.$file ~/.$file.bak
+  fi
+
+  ln -s $DOTFILES_DIR/$file ~/.$file 2> /dev/null
+done
+
+#
+# vim
+#
+
+if which vim > /dev/null; then
+  if [ $VUNDLE ]; then
+    if [ ! -d $VUNDLE_DIR ]; then
+      echo "Installing Vundle..."
+
+      mkdir -p $VIM_BUNDLE_DIR
+      git clone git://github.com/gmarik/vundle.git $VUNDLE_DIR
+
+      if [ $VUNDLE_INSTALL_PLUGINS -eq 1 ]; then
+        echo "Installing Vundle plugins..."
+        vim +PluginInstall +qall
+      fi
+    fi
+  fi
+fi
+
+#
+# zsh
+#
+
+if which zsh > /dev/null; then
+  if [ $OH_MY_ZSH -eq 1 ]; then
+    # Install oh-my-zsh if it's not already
+    if [ ! -d $OH_MY_ZSH_DIR ]; then
+      echo "Installing oh-my-zsh..."
+
+      # Clone oh-my-zsh
+      git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $OH_MY_ZSH_DIR
+    fi
+
+    OH_MY_ZSH_CUSTOM_DIR=$OH_MY_ZSH_DIR/custom
+    OH_MY_ZSH_CUSTOM_PLUGINS_DIR=$OH_MY_ZSH_CUSTOM_DIR/plugins
+    OH_MY_ZSH_CUSTOM_THEMES_DIR=$OH_MY_ZSH_CUSTOM_DIR/themes
+
+    # Update custom plugins
+    mkdir -p $OH_MY_ZSH_CUSTOM_PLUGINS_DIR
+    pushd $OH_MY_ZSH_CUSTOM_PLUGINS_DIR > /dev/null
+    for plugin in ${OH_MY_ZSH_CUSTOM_PLUGINS[@]}; do
+      KEY="${plugin%%|*}"
+      VALUE="${plugin##*|}"
+
+      echo "Updating ${KEY}..."
+
+      # Check if the plugin is already installed
+      if [ -d $KEY ]; then
+        # Update it
+        pushd $KEY > /dev/null
+        git pull
+        popd > /dev/null
+      else
+        # Clone it
+        git clone $VALUE $KEY
+      fi
+    done
+    popd > /dev/null
+
+    # Install custom themes
+    mkdir -p $OH_MY_ZSH_CUSTOM_THEMES_DIR
+    for theme in ${OH_MY_ZSH_CUSTOM_THEMES[@]}; do
+      KEY="${theme%%|*}"
+      VALUE="${theme##*|}"
+
+      echo "Updating ${KEY}..."
+
+      # Download the theme
+      if [ $CURL_INSTALLED -eq 1 ]; then
+        echo $VALUE
+        curl $VALUE -o $OH_MY_ZSH_CUSTOM_THEMES_DIR/$KEY
+      elif [ $WGET_INSTALLED -eq 1 ]; then
+        wget $VALUE -O $OH_MY_ZSH_CUSTOM_THEMES_DIR/$KEY
+      else
+        # This shouldn't happen due to a prior check, but just in case...
+        echo "WARNING: $KEY was not installed, need either curl or wget"
+      fi
+    done
+  fi
+fi
