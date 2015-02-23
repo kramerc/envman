@@ -65,7 +65,7 @@ fi
 
 # Ensure links are set up
 for file in ${DOTFILES[@]}; do
-  if [ -e $file ]; then
+  if [ -e ~/.$file ]; then
     mv ~/.$file ~/.$file.bak
   fi
 
