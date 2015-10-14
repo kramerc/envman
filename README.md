@@ -4,24 +4,6 @@ An environment manager crafted to my needs.
 
 ## Installation
 
-### Automatic
-
-Run the following in your shell:
-
-```
-curl https://raw.githubusercontent.com/kramerc/envman/master/bin/envman_install | bash
-```
-
-If you don't have curl installed, you can use the wget variant of this command:
-
-```
-wget https://raw.githubusercontent.com/kramerc/envman/master/bin/envman_install -O - | bash
-```
-
-Your editor will open during the process so that you can configure envman.
-
-### Manual
-
 1. Clone envman to your home directory
 
    ```
