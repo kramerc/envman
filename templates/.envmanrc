@@ -41,7 +41,7 @@ export OH_MY_ZSH_DIR=~/.oh-my-zsh
 
 # oh-my-zsh custom plugins, should be Git repos
 export OH_MY_ZSH_CUSTOM_PLUGINS=(
-  "zsh-syntax-highlighting|git://github.com/zsh-users/zsh-syntax-highlighting.git"
+  "zsh-syntax-highlighting|https://github.com/zsh-users/zsh-syntax-highlighting.git"
 )
 
 # oh-my-zsh custom themes, should be direct raw links

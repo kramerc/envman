@@ -7,14 +7,14 @@ An environment manager crafted to my needs.
 1. Clone envman to your home directory
 
    ```
-   git clone git://github.com/kramerc/envman.git ~/.envman
+   git clone https://github.com/kramerc/envman.git ~/.envman
    ```
 
-2. Symlink envman to `~/bin`
+2. Symlink envman to a directory in `$PATH`, (e.g., `~/.local/bin`)
 
    ```
-   mkdir -p ~/bin
-   ln -s ~/.envman/bin/envman ~/bin
+   mkdir -p ~/.local/bin
+   ln -s ~/.envman/bin/envman ~/.local/bin
    ```
 
 3. Configure envman (see the [Configuration](#configuration) section below for options)
