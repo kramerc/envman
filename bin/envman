@@ -82,7 +82,7 @@ if which vim > /dev/null; then
       echo "Installing Vundle..."
 
       mkdir -p $VIM_BUNDLE_DIR
-      git clone git://github.com/gmarik/vundle.git $VUNDLE_DIR
+      git clone https://github.com/gmarik/vundle.git $VUNDLE_DIR
 
       if [ $VUNDLE_INSTALL_PLUGINS -eq 1 ]; then
         echo "Installing Vundle plugins..."
