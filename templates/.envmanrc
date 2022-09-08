@@ -21,6 +21,17 @@ export DOTFILES=(
 # export DOTFILES=$(find $DOTFILES_DIR -maxdepth 1 -exec basename {} \; | grep -Ev "^\.")
 
 #
+# tmux
+#
+
+export TMUX_DIR=~/.tmux
+export TMUX_PLUGINS_DIR=$TMUX_DIR/plugins
+export TMUX_TPM_DIR=$TMUX_PLUGINS_DIR/tpm
+
+# Install tmux tpm if not present?
+export TMUX_TPM_PLUGIN=1
+
+#
 # vim
 #
 
