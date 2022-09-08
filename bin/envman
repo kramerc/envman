@@ -65,11 +65,11 @@ fi
 
 # Ensure links are set up
 for file in ${DOTFILES[@]}; do
-  if [ -e ~/.$file ]; then
+  if [ ! -L ~/.$file ] && [ -e ~/.$file ]; then
     mv ~/.$file ~/.$file.bak
   fi
 
-  ln -s $DOTFILES_DIR/$file ~/.$file 2> /dev/null
+  ln -sf $DOTFILES_DIR/$file ~/.$file
 done
 
 #
