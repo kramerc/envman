@@ -15,6 +15,10 @@ export DOTFILES=(
   zshrc
   vimrc
 )
+# The list of dotfiles can also by managed by command substitution
+#
+# Example: To use all dotfiles at the root of the repo:
+# export DOTFILES=$(find $DOTFILES_DIR -maxdepth 1 -exec basename {} \; | grep -Ev "^\.")
 
 #
 # vim
